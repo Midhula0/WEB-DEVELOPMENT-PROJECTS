@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz App</title>
+  <style>
+    body {
+  background-image: url('https://img.freepik.com/premium-photo/data-protection-network-security-concept-glowing-light-shield-business-man-hand-internet-fire-wall-protect-created-with-generative-ai-technology_132358-10971.jpg?size=626&ext=jpg&ga=GA1.1.120830087.1696522571&semt=sph');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.quiz-container {
+  max-width: 500px;
+  background-color: #eff1e6ab;
+  border-radius: 10px;
+  padding:40px;
+  box-shadow: 0 0 10px rgba(206, 30, 30, 0.2);
+}
+
+h1 {
+  text-align: center;
+}
+
+#question-container {
+  margin-bottom: 20px;
+}
+
+#question-text {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#answer-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+button {
+  height: 40px;
+  font-size: 16px;
+  background-color: #eaeaea;
+  border: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #aa9595;
+}
+
+#controls-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#timer-container {
+  display: flex;
+  align-items: center;
+}
+
+#timer-text {
+  font-size: 14px;
+}
+
+#timer {
+  font-weight: bold;
+  margin-left: 5px;
+}
+#btn1
+{
+  border-radius: 10px;
+  
+}
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>DO YOU WANT TO EXPLORE THE WEBSITE</h1>
+    <div id="question-container">
+      <p id="question-text"></p>
+      <div id="answer-buttons"></div>
+    </div>
+    <div id="controls-container">
+      <b><button id="start-button">Start Quiz</button></b>
+      <div id="timer-container">
+        <span id="timer-text">Time Left: <span id="timer">0</span></span>
+      </div>
+    </div>
+  </div>
+  <script>
+    const quizQuestions = [
+  {
+    question: "why you need to open this website?",
+    options: ["Timepass", "to study"],
+    correctAnswer: "to study"
+  },
+  {
+    question: "Which planet is known as the Red Planet?",
+    options: ["Venus", "Mars", "Jupiter", "Saturn"],
+    correctAnswer: "Mars"
+  },
+  {
+    question: "What is the chemical symbol for gold?",
+    options: ["Au", "Ag", "Cu", "Fe"],
+    correctAnswer: "Au"
+  }
+];
+
+// Variables to track quiz state
+let currentQuestionIndex = 0;
+let score = 0;
+let timeLeft = 30;
+let timerInterval;
+
+// Function to start the quiz
+function startQuiz() {
+  // Hide the start button and display the first question
+  document.getElementById("start-button").style.display = "none";
+  displayQuestion();
+  startTimer();
+}
+
+// Function to display a question and its options
+function displayQuestion() {
+  const currentQuestion = quizQuestions[currentQuestionIndex];
+  const questionText = document.getElementById("question-text");
+  const answerButtons = document.getElementById("answer-buttons");
+
+  // Clear previous question and answer options
+  questionText.innerHTML = "";
+  answerButtons.innerHTML = "";
+
+  // Display the current question
+  questionText.innerHTML = currentQuestion.question;
+
+  // Create answer buttons for each option
+  currentQuestion.options.forEach(option => {
+    const button = document.createElement("button");
+    button.innerText = option;
+    button.classList.add("answer-button");
+    answerButtons.appendChild(button);
+
+    // Add click event listener to check the answer
+    button.addEventListener("click", function() {
+      checkAnswer(option);
+    });
+  });
+}
+
+// Function to check the selected answer
+function checkAnswer(selectedOption) {
+  const currentQuestion = quizQuestions[currentQuestionIndex];
+
+  // Check if the selected answer is correct
+  if (selectedOption === currentQuestion.correctAnswer) {
+    score++;
+  }
+
+  // Move to the next question or end the quiz if all questions are answered
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex < quizQuestions.length) {
+    displayQuestion();
+  } else {
+    endQuiz();
+  }
+}
+
+// Function to start the timer
+function startTimer() {
+  timerInterval = setInterval(function() {
+    timeLeft--;
+
+    // Update the timer text
+    document.getElementById("timer").textContent = timeLeft;
+
+    // End the quiz if time runs out
+    if (timeLeft <= 0) {
+      endQuiz();
+    }
+  }, 1000);
+}
+
+// Function to end the quiz
+function endQuiz() {
+  // Stop the timer
+  clearInterval(timerInterval);
+
+  // Calculate the score percentage
+   const scorePercentage = (score / quizQuestions.length) * 100;
+   
+  // Display the final score
+  
+  if( score==2)
+   {
+    alert("acess granted")
+    const questionContainer = document.getElementById("question-container");
+    questionContainer.innerHTML = `
+      <h2>Quiz Completed!</h2>
+      <p>Your Score: ${score} out of ${quizQuestions.length}</p>
+      <p>Score Percentage: ${scorePercentage}%</p> 
+      <button class="btn1"><a href= "task 3.1.html"></a>lets start</button>
+  `;}
+   else{
+    alert("acesss denied")
+   }
+  
+}
+  /*
+  function checkAnswers() {
+            var answer1 = document.getElementById("answer1").value;
+            var answer2 = document.getElementById("answer2").value;
+            var answer3 = document.getElementById("answer3").value;
+
+        function result(){
+            if (answer1 === "4" && answer2.toLowerCase() === "paris" && answer3.toLowerCase() === "shakespeare") {
+                document.getElementById("result").innerHTML = "Access Granted";
+            } else {
+                document.getElementById("result").innerHTML = "Access Denied";
+            }
+          }*/
+  
+
+
+// Add event listener to start the quiz when the start button is clicked
+document.getElementById("start-button").addEventListener("click", startQuiz);
+
+  </script>
+</body>
+</html>
