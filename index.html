@@ -1,349 +1,246 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
-		content="width=device-width, 
-						initial-scale=1.0">
-	<title>LOGIN/SIGNUP</title>
-	<style>
-        @import url(
-"https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: "Poppins", sans-serif;
+    <meta charset="UTF-8">
+    <title>LogIn and SignUp Page</title>
+    
+    <style>
+        body{
+    margin: 0;
+    padding: 0;
+    background-image: url(place2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(1px);
+    font-family : Verdana,Tahoma, sans-serif;
 }
 
-body {
-	height: 100vh;
-	width: 100vw;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	gap: 30px;
-	background-color: rgb(231, 231, 231);
+.box{
+    width: 380px;
+    height: 500px;
+    background-color:rgba(148, 203, 237, 0.7);
+    padding: 20px;
+    margin: 8% auto 0;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    flex-direction: column;
 }
 
-header {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
+.box img{
+	width:100px;
+    margin-top:-30px ;
 }
 
-.heading {
-	color: green;
-}
-
-.title {
-	font-weight: 400;
-	letter-spacing: 1.5px;
-}
-
-.container {
-	height: 600px;
-	width: 500px;
-	background-color: white;
-	box-shadow: 8px 8px 20px rgb(128, 128, 128);
-	position: relative;
-	overflow: hidden;
-	opacity: blur(10px);
-}
-
-.btn {
-	height: 60px;
+.header {
 	width: 300px;
-	margin: 20px auto;
-	box-shadow: 10px 10px 30px rgb(254, 215, 188);
-	border-radius: 50px;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
+    height: 50px;
+    text-transform: uppercase;
+	display: inline-flex;
+    padding-top: 20px;
+    padding-bottom: 0;
+	justify-content: space-between;
 }
 
-.login,
-.signup {
-	font-size: 22px;
-	border: none;
-	outline: none;
-	background-color: transparent;
-	position: relative;
-	cursor: pointer;
-}
-
-.slider {
-	height: 60px;
-	width: 150px;
-	border-radius: 50px;
-	background-image: linear-gradient(to right,
-			rgb(255, 195, 110),
-			rgb(255, 146, 91));
-	position: absolute;
-	top: 20px;
-	left: 100px;
-	transition: all 0.5s ease-in-out;
-}
-
-.moveslider {
-	left: 250px;
-}
-
-.form-section {
-	height: 500px;
-	width: 1000px;
-	padding: 20px 0;
-	display: flex;
-	position: relative;
-	transition: all 0.5s ease-in-out;
-	left: 0px;
-}
-
-.form-section-move {
-	left: -500px;
-}
-
-.login-box,
-.signup-box {
-	height: 100%;
-	width: 500px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+.header a {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #3609ed;
+	display: inline-flex;
+    padding-left: 25px;
+    padding-right: 25px;
 	justify-content: center;
-	padding: 0px 40px;
+    cursor:pointer;
 }
 
-.login-box {
-	gap: 50px;
+.header .active {
+    color: #3609ed;
+	font-weight: bold;
+	position: relative;
 }
 
-.signup-box {
-	gap: 30px;
+.header .active:after {
+	position: absolute;
+    border: none;
+	content: "";
 }
 
-.ele {
-	height: 60px;
-	width: 400px;
-	outline: none;
-	border: none;
-	color: rgb(77, 77, 77);
-	background-color: rgb(240, 240, 240);
-	border-radius: 50px;
-	padding-left: 30px;
-	font-size: 18px;
+#errorMsg{
+    color:red;
+    text-align: center;
+    font-size: 12px;
+    padding-bottom: 20px;
+
 }
 
-.clkbtn {
-	height: 60px;
-	width: 150px;
-	border-radius: 50px;
-	background-image: linear-gradient(to right,
-			rgb(255, 195, 110),
-			rgb(255, 146, 91));
-	font-size: 22px;
-	border: none;
-	cursor: pointer;
+.content{
+    display: inline-flex;
+    overflow: hidden;
 }
 
-/* For Responsiveness of the page */
-
-@media screen and (max-width: 650px) {
-	.container {
-		height: 600px;
-		width: 300px;
-	}
-
-	.title {
-		font-size: 15px;
-	}
-
-	.btn {
-		height: 50px;
-		width: 200px;
-		margin: 20px auto;
-	}
-
-	.login,
-	.signup {
-		font-size: 19px;
-	}
-
-	.slider {
-		height: 50px;
-		width: 100px;
-		left: 50px;
-	}
-
-	.moveslider {
-		left: 150px;
-	}
-
-	.form-section {
-		height: 500px;
-		width: 600px;
-	}
-
-	.form-section-move {
-		left: -300px;
-	}
-
-	.login-box,
-	.signup-box {
-		height: 100%;
-		width: 300px;
-	}
-
-	.ele {
-		height: 50px;
-		width: 250px;
-		font-size: 15px;
-	}
-
-	.clkbtn {
-		height: 50px;
-		width: 130px;
-		font-size: 19px;
-	}
+form {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+	flex-shrink: 0;
+	flex-direction: column;
+	transition: right 0.5s;
 }
 
-@media screen and (max-width: 320px) {
-	.container {
-		height: 600px;
-		width: 250px;
-	}
+.login a{
+    text-decoration: none;
+    color: rgba(82, 178, 238, 0.516);
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
 
-	.heading {
-		font-size: 30px;
-	}
+}
 
-	.title {
-		font-size: 10px;
-	}
+.extend form {
+	right: 100%;
+}
 
-	.btn {
-		height: 50px;
-		width: 200px;
-		margin: 20px auto;
-	}
+input[type=text], input[type=password], input[type=email]{
+	display:block;
+    position: relative;
+	border: 4px solid #5632e7;
+	padding: 12px;
+    margin-bottom: 15px;
+    width: 100%;
+ 	box-sizing: border-box;
+    font-size: 17px;
+    outline: none;
+    border-radius: 5px;
+}
 
-	.login,
-	.signup {
-		font-size: 19px;
-	}
+input[type=text]:hover,  input[type=password]:hover, input[type=email]:hover{
+    border: 4px solid #31b1e8;
 
-	.slider {
-		height: 50px;
-		width: 100px;
-		left: 27px;
-	}
+}
 
-	.moveslider {
-		left: 127px;
-	}
-
-	.form-section {
-		height: 500px;
-		width: 500px;
-	}
-
-	.form-section-move {
-		left: -250px;
-	}
-
-	.login-box,
-	.signup-box {
-		height: 100%;
-		width: 250px;
-	}
-
-	.ele {
-		height: 50px;
-		width: 220px;
-		font-size: 15px;
-	}
-
-	.clkbtn {
-		height: 50px;
-		width: 130px;
-		font-size: 19px;
-	}
+input[type=submit]{
+    display:block;
+    position: relative;
+    border: 3px solid #df80ff;
+    padding: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-radius: 25px;
+    background-color:rgb(96, 100, 240) ;
+    text-align:center;
+    font-size: 20px;
+    color: #ffffff;
+	cursor:pointer;
+    outline: none;
+}
+	
+input[type=submit]:hover{
+	 background-color:#ffffff;
+     color: #000000;
+     font-weight: bold;
+}
+input[type=checkbox]{
+    background-color:#df80ff;
+}
+#check{
+    margin-top: 10px;
+    text-align: left;
+    color: #ffffff;
+    font-size: 15px;
 }
 
     </style>
 </head>
 
 <body>
-	<header>
-		<h1 class="heading"></h1>
-		<h3 class="title"></h3>
-	</header>
+    <div class="box">
 
-	<!-- container div -->
-	<div class="container">
-
-		<!-- upper button section to select
-			the login or signup form -->
-		<div class="slider"></div>
-		<div class="btn">
-			<button class="login">Login</button>
-			<button class="signup">Signup</button>
-		</div>
-
-		<!-- Form section that contains the
-			login and the signup form -->
-		<div class="form-section">
-
-			<!-- login form -->
-			<div class="login-box">
-				<input type="email"
-					class="email ele"
-					placeholder="youremail@email.com" name="mail">
-				<input type="password"
-					class="password ele"
-					placeholder="password" name="password">
-				<button class="clkbtn">Login</button>
-			</div>
-
-			<!-- signup form -->
-			<div class="signup-box">
-				<input type="text"
-					class="name ele"
-					placeholder="Enter your name" name="uname">
-				<input type="email"
-					class="email ele"
-					placeholder="youremail@email.com" name email>
-				<input type="password"
-					class="password ele"
-					placeholder="password" name="pwd">
-				<input type="password"
-					class="password ele"
-					placeholder="Confirm password" name="newpwd">
-				<button class="clkbtn">Signup</button>
-			</div>
-		</div>
-	</div>
-	<script>
-        let signup = document.querySelector(".signup");
-let login = document.querySelector(".login");
-let slider = document.querySelector(".slider");
-let formSection = document.querySelector(".form-section");
-
-signup.addEventListener("click", () => {
-	slider.classList.add("moveslider");
-	formSection.classList.add("form-section-move");
+        <img src="login-removebg.png">
+        <div class="page">
+            <div class="header">
+                <a id="login" class="active" href="#login">login</a>
+                <a id="signup" href="#signup">signup</a>
+            </div>
+            <div id="errorMsg"></div>
+            <div class="content">
+                <form class="login" name="loginForm" onsubmit="return validateLoginForm()" method="POST">
+                    <input type="text" name="name" id="logName" placeholder="Username">
+                    <input type="password" name="password" id="logPassword" placeholder="Password">
+                    <div id="check">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <br><br>
+                    <input type="submit" value="Login">
+                    <a href="#">Forgot Password?</a>
+                </form>
+                <form class="signup" name="signupForm" onsubmit="return validateSignupForm()" method="POST">
+                    <input type="email" name="email" id="signEmail" placeholder="Email">
+                    <input type="text" name="name" id="signName" placeholder="Username">
+                    <input type="password" name="password" id="signPassword" placeholder="Password"><br>
+                    <label for="q1">What motivated you to apply for this position?
+                    </label>
+                    <input type="text" name="ques 1" id="signq1" placeholder="Question 1"><br>
+                    <input type="submit" value="SignUp">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        $(window).on("hashchange", function () {
+	if (location.hash.slice(1) == "signup") {
+		$(".page").addClass("extend");
+		$("#login").removeClass("active");
+		$("#signup").addClass("active");
+	} else {
+		$(".page").removeClass("extend");
+		$("#login").addClass("active");
+		$("#signup").removeClass("active");
+	}
 });
+$(window).trigger("hashchange");
 
-login.addEventListener("click", () => {
-	slider.classList.remove("moveslider");
-	formSection.classList.remove("form-section-move");
-});
+function validateLoginForm() {
+	var name = document.getElementById("logName").value;
+	var password = document.getElementById("logPassword").value;
+
+	if (name == "" || password == "") {
+		document.getElementById("errorMsg").innerHTML = "Please fill the required fields"
+		return false;
+	}
+
+	else if (password.length < 8) {
+		document.getElementById("errorMsg").innerHTML = "Your password must include atleast 8 characters"
+		return false;
+	}
+	else {
+		alert("Successfully logged in");
+		return true;
+	}
+}
+function validateSignupForm() {
+	var mail = document.getElementById("signEmail").value;
+	var name = document.getElementById("signName").value;
+	var password = document.getElementById("signPassword").value;
+
+	if (mail == "" || name == "" || password == "") {
+		document.getElementById("errorMsg").innerHTML = "Please fill the required fields"
+		return false;
+	}
+
+	else if (password.length < 8) {
+		document.getElementById("errorMsg").innerHTML = "Your password must include atleast 8 characters"
+		return false;
+	}
+	else {
+		alert("Successfully signed up");
+		return true;
+	}
+}
 
     </script>
 </body>
-</html>
